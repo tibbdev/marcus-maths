@@ -1,17 +1,31 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.22)
 
-project(stupid_maths)
+project(marcus_maths)
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS ON)
 
-add_subdirectory(mt_maths)
+#############################################################
+#                                                           #
+# Library & Application                                     #
+#                                                           #
+#############################################################
+
+add_subdirectory(marcus_maths)
 add_subdirectory(app)
 
-target_link_libraries(${CMAKE_PROJECT_NAME} lib_mt_maths)
+include(marcus_maths/marcus_maths.cmake)
 
-set(TEST_EXE_NAME ${CMAKE_PROJECT_NAME}_tests)
+target_link_libraries(${CMAKE_PROJECT_NAME} ${MARCUS_MATHS_LIB_NAME})
+
+#############################################################
+#                                                           #
+# Unit Testing...                                           #
+#                                                           #
+#############################################################
+
+set(TEST_EXE_NAME ${MARCUS_MATHS_LIB_NAME}_tests)
 
 # GoogleTest requires at least C++14
 set(CMAKE_CXX_STANDARD 14)
@@ -37,7 +51,7 @@ add_executable(${TEST_EXE_NAME}
 )
 
 target_link_libraries(${TEST_EXE_NAME}
-    lib_mt_maths
+    ${MARCUS_MATHS_LIB_NAME}
     GTest::gtest_main
 )
 
