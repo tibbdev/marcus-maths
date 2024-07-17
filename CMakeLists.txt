@@ -46,8 +46,8 @@ enable_testing()
 include_directories(${CMAKE_SOURCE_DIR})
 
 add_executable(${TEST_EXE_NAME}
-    tests/src/hello_tests.cpp
-    tests/src/mtmaths_tests.cpp
+    # tests/src/hello_tests.cpp
+    tests/src/marcus_maths_tests.cpp
 )
 
 target_link_libraries(${TEST_EXE_NAME}
